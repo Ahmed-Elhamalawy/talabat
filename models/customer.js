@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
 const customerSchema = new mongoose.Schema(
   {
@@ -20,6 +21,14 @@ const customerSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+// create schema method applied before save
+
+customerSchema.pre("save", async function (next) {
+  const salt = await bcrypt.genSalt();
+  const hashedPassword = await bcrypt.hash(this.password, salt);
+  this.password = hashedPassword;
+  next();
+});
 
 const Customer = mongoose.model("Customer", customerSchema);
 
