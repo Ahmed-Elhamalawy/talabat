@@ -4,6 +4,7 @@ const cors = require("cors");
 const config = require("./config/config");
 const connectDB = require("./config/db");
 const customerRouter = require("./routes/customerRouter");
+const driverRouter = require("./routes/driverRouter");
 
 // Run Database and Express
 // TODO: Add Database ASYNC
@@ -13,6 +14,8 @@ const port = config.port || 3000;
 //Middlewares
 app.use(express.json());
 app.use("/customer", customerRouter);
+app.use("/driver", driverRouter);
+app.use(cors());
 //Routes
 app.get("/", (req, res) => {
   res.send("Hello World!");

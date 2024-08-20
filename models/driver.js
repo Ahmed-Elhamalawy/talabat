@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
 const driverSchema = new mongoose.Schema(
   {
@@ -7,6 +8,15 @@ const driverSchema = new mongoose.Schema(
       required: true,
     },
     lastName: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    password: {
       type: String,
       required: true,
     },
@@ -32,6 +42,13 @@ const driverSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+driverSchema.pre("save", async function (next) {
+  const salt = await bcrypt.genSalt();
+  const hashedPassword = await bcrypt.hash(this.password, salt);
+  this.password = hashedPassword;
+  next();
+});
 
 const Driver = mongoose.model("Driver", driverSchema);
 

@@ -29,7 +29,12 @@ const restaurantSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-
+restaurantSchema.pre("save", async function (next) {
+  const salt = await bcrypt.genSalt();
+  const hashedPassword = await bcrypt.hash(this.password, salt);
+  this.password = hashedPassword;
+  next();
+});
 const Restaurant = mongoose.model("Restaurant", restaurantSchema);
 
 module.exports = Restaurant;
