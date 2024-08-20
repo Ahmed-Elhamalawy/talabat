@@ -1,8 +1,13 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
 const restaurantSchema = new mongoose.Schema(
   {
     name: {
+      type: String,
+      required: true,
+    },
+    password: {
       type: String,
       required: true,
     },

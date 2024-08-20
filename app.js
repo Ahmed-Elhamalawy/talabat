@@ -5,6 +5,7 @@ const config = require("./config/config");
 const connectDB = require("./config/db");
 const customerRouter = require("./routes/customerRouter");
 const driverRouter = require("./routes/driverRouter");
+const resturantRouter = require("./routes/resturantRouter");
 
 // Run Database and Express
 // TODO: Add Database ASYNC
@@ -15,6 +16,7 @@ const port = config.port || 3000;
 app.use(express.json());
 app.use("/customer", customerRouter);
 app.use("/driver", driverRouter);
+app.use("/resturant", resturantRouter);
 app.use(cors());
 //Routes
 app.get("/", (req, res) => {
