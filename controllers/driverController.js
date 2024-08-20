@@ -1,4 +1,5 @@
 const driverService = require("../services/driverService");
+const jsend = require("jsend");
 
 const signUp = async (req, res, next) => {
   try {
@@ -28,7 +29,7 @@ const signUp = async (req, res, next) => {
       maxAge: 1000 * 60 * 60 * 24, // 1 day
     });
     // console.log(driver);
-    res.send(driver);
+    res.send(jsend.success(driver));
   } catch (error) {
     next(error);
   }

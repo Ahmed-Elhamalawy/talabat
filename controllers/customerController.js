@@ -1,4 +1,5 @@
 const customerService = require("../services/customerService");
+const jsend = require("jsend");
 
 const signUp = async (req, res, next) => {
   try {
@@ -17,7 +18,7 @@ const signUp = async (req, res, next) => {
     });
     console.log(customer);
 
-    res.send(customer);
+    res.send(jsend.success(customer));
   } catch (error) {
     next(error);
   }

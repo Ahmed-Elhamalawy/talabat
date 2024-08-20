@@ -1,4 +1,5 @@
 const restaurantService = require("../services/resturantService");
+const jsend = require("jsend");
 
 const signUp = async (req, res, next) => {
   try {
@@ -11,7 +12,7 @@ const signUp = async (req, res, next) => {
       owner,
       password
     );
-    res.send(resturant);
+    res.send(jsend.success(resturant));
     res.cookie("token", resturant.token, {
       httpOnly: true,
       secure: true,
