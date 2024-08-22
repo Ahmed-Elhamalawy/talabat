@@ -25,6 +25,28 @@ const signUp = async (firstName, lastName, email, password, phoneNumber) => {
   }
 };
 
+const login = async (email, password) => {
+  try {
+    const customer = await customerRepo.getCustomerByEmail(email);
+    if (!customer) {
+      throw "user not found";
+    }
+    const isMatch = await bcrypt.compare(password, customer.password);
+    if (!isMatch) {
+      throw "password not match";
+    }
+    const token = jwt.sign({ email }, config.jwt.secret, {
+      expiresIn: config.jwt.expiration,
+    });
+    return {
+      customer,
+      token,
+    };
+  } catch (error) {
+    throw error;
+  }
+};
 module.exports = {
   signUp,
+  login,
 };

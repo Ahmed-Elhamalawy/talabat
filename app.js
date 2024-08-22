@@ -16,7 +16,7 @@ const port = config.port || 3000;
 app.use(express.json());
 app.use("/customer", customerRouter);
 app.use("/driver", driverRouter);
-app.use("/resturant", resturantRouter);
+app.use("/restaurant", resturantRouter);
 app.use(cors());
 //Routes
 app.get("/", (req, res) => {

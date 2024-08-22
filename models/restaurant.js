@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 const restaurantSchema = new mongoose.Schema(
   {
     name: {
+      unique: true,
       type: String,
       required: true,
     },

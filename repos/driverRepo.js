@@ -27,5 +27,13 @@ const createDriver = async (
     throw console.log(error, "repo error");
   }
 };
+const getDriverbyEmail = async (email) => {
+  try {
+    const driver = await Driver.findOne({ email });
+    return driver;
+  } catch (error) {
+    throw error;
+  }
+};
 
-module.exports = { createDriver };
+module.exports = { createDriver, getDriverbyEmail };

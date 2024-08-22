@@ -23,4 +23,13 @@ const createCustomer = async (
   }
 };
 
-module.exports = { createCustomer };
+const getCustomerByEmail = async (email) => {
+  try {
+    const customer = await Customer.findOne({ email });
+    return customer;
+  } catch (error) {
+    throw error;
+  }
+};
+
+module.exports = { createCustomer, getCustomerByEmail };

@@ -23,4 +23,13 @@ const createRestaurant = async (
     throw error;
   }
 };
-module.exports = { createRestaurant };
+
+const getRestaurantbyName = async (name) => {
+  try {
+    const restaurant = await Restaurant.findOne({ name });
+    return restaurant;
+  } catch (error) {
+    throw error;
+  }
+};
+module.exports = { createRestaurant, getRestaurantbyName };
